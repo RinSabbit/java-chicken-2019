@@ -21,16 +21,15 @@ public class ChickenController {
         menus = MenuRepository.menus();
     }
 
-    public void run() {
-        OutputView.printMainCategory();
+    public static void run() {
         chooseMainCategory();
-
     }
 
-    private void chooseMainCategory() {
+    private static void chooseMainCategory() {
         try {
+            OutputView.printMainCategory();
             OutputView.printChoice();
-            MainScreen.execute(ValidateUtils.isNumber(InputView.inputValue()));
+            MainScreen.execute(InputView.inputValue());
         } catch (ChickenException exception) {
             OutputView.showErrorMessage(exception);
             chooseMainCategory();
@@ -38,19 +37,27 @@ public class ChickenController {
     }
 
     public static void order() {
-        OutputView.printTables(tables);
-        int tableNumber = InputView.inputTableNumber();
+        int tableNumber = showTable();
         OutputView.printMenus(menus);
         OutputView.chooseMenu();
-        int menuNumber = ValidateUtils.isNumber(InputView.inputValue());
+        int menuNumber = InputView.inputValue();
         OutputView.chooseMenuAccount();
-        int menuAccount = ValidateUtils.isNumber(InputView.inputValue());
+        int menuAccount = InputView.inputValue();
         Table table = TableRepository.getTable(tableNumber);
         table.add(MenuRepository.getMenu(menuNumber),menuAccount);
+        run();
+    }
+
+    private static int showTable() {
+        OutputView.printTables(tables);
+        return InputView.inputTableNumber();
     }
 
     public static void pay() {
-        System.out.println("paty");
+        int tableNumber = showTable();
+        Table table = TableRepository.getTable(tableNumber);
+        table.pay();
+        run();
     }
 
     public static void exit() {

@@ -3,6 +3,7 @@ package domain;
 import exception.ChickenException;
 import java.util.HashMap;
 import java.util.Map;
+import view.OutputView;
 
 public class Table {
     private final int number;
@@ -41,7 +42,14 @@ public class Table {
     }
 
     public void pay(){
-        menus.forEach((menu, amount) -> payPrice += menu.calculatePrice(amount));
+        if(hasMenu()){
+            OutputView.printPayment(number);
+            Payment payment = new Payment(this,menus);
+            payment.payMoney();
+            menus.clear();
+            return;
+        }
+        throw new ChickenException("테이블에 결제할 메뉴가 없습니다.");
     }
 
     public boolean hasMenu(){
@@ -50,6 +58,10 @@ public class Table {
 
     public boolean isTable(int number){
         return this.number == number;
+    }
+
+    public int isMoreThanTen(Menu menu){
+        return menus.get(menu) / 10;
     }
 
 }

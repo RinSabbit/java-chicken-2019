@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.media.jfxmediaimpl.HostUtils;
 import domain.MainScreen;
 import domain.Menu;
 import domain.Table;
@@ -67,5 +68,19 @@ public class OutputView {
 
     public static void chooseMenuAccount(){
         System.out.println(INPUT_FOOD_AMOUNT);
+    }
+
+    public static void choosePayment() {
+        System.out.println("## 신용카드는 1번, 현금은 2번");
+    }
+
+    public static void printPayment(int table) {
+        System.out.println("## " + table + "번 테이블의 결제를 진행합니다.");
+
+    }
+
+    public static void printFinalPrice(double payPrice) {
+        System.out.println("## 최종 결제할 금액");
+        System.out.println(Math.round(payPrice) + "원"+System.lineSeparator());
     }
 }
