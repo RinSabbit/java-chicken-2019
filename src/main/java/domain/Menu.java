@@ -23,11 +23,11 @@ public class Menu {
         return price * amount;
     }
 
-    public boolean isMenu(int number){
+    public boolean isMenu(int number) {
         return this.number == number;
     }
 
-    public boolean isChicken(){
+    public boolean isChicken() {
         return category.equals(Category.CHICKEN);
     }
 }

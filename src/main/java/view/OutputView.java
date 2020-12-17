@@ -7,6 +7,13 @@ import exception.ChickenException;
 import java.util.List;
 
 public class OutputView {
+
+    public static final String TABLE_LIST = "## 테이블 목록";
+    public static final String CHOOSE_PAYMENT = "## 신용카드는 1번, 현금은 2번";
+    public static final String FINAL_PAY_PRICE = "## 최종 결제할 금액";
+    public static final String WON = "원";
+    public static final String PAY_TABLE = "번 테이블의 결제를 진행합니다.";
+    public static final String GUIDE_PREFIX = "## ";
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
@@ -18,20 +25,20 @@ public class OutputView {
     private static final String INPUT_FOOD_AMOUNT = "## 메뉴의 수량을 입력하세요.";
 
     public static void printTables(final List<Table> tables) {
-        System.out.println("## 테이블 목록");
+        System.out.println(TABLE_LIST);
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
         checkOrderedTables(tables);
     }
 
-    private static void checkOrderedTables(List<Table> tables){
+    private static void checkOrderedTables(List<Table> tables) {
         tables.forEach(OutputView::printOrderedTables);
         System.out.println(System.lineSeparator());
     }
 
-    private static void printOrderedTables(Table table){
-        if(table.hasMenu()){
+    private static void printOrderedTables(Table table) {
+        if (table.hasMenu()) {
             System.out.print(ORDER_BOTTOM_LINE);
             return;
         }
@@ -60,7 +67,7 @@ public class OutputView {
 
     public static void printMainCategory() {
         System.out.println(MAIN_SCREEN_CATEGORY);
-        for(MainScreen type : MainScreen.values()){
+        for (MainScreen type : MainScreen.values()) {
             System.out.println(type.getMenu());
         }
     }
@@ -77,22 +84,22 @@ public class OutputView {
         System.out.println(CHOOSE_FOOD_MENU);
     }
 
-    public static void chooseMenuAccount(){
+    public static void chooseMenuAccount() {
         System.out.println(INPUT_FOOD_AMOUNT);
     }
 
     public static void choosePayment() {
-        System.out.println("## 신용카드는 1번, 현금은 2번");
+        System.out.println(CHOOSE_PAYMENT);
     }
 
     public static void printPayment(int table) {
-        System.out.println("## " + table + "번 테이블의 결제를 진행합니다.");
+        System.out.println(GUIDE_PREFIX + table + PAY_TABLE);
 
     }
 
     public static void printFinalPrice(double payPrice) {
-        System.out.println("## 최종 결제할 금액");
-        System.out.println(Math.round(payPrice) + "원"+System.lineSeparator());
+        System.out.println(FINAL_PAY_PRICE);
+        System.out.println(Math.round(payPrice) + WON + System.lineSeparator());
     }
 
     public static void chooseTable() {

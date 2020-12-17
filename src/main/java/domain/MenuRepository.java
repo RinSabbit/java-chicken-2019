@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MenuRepository {
+
     private static final List<Menu> menus = new ArrayList<>();
 
     static {
@@ -23,7 +24,7 @@ public class MenuRepository {
         return Collections.unmodifiableList(menus);
     }
 
-    public static Menu getMenu(int number){
+    public static Menu getMenu(int number) {
         return menus.stream()
             .filter(menu -> menu.isMenu(number))
             .findFirst()

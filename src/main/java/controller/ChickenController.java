@@ -7,7 +7,6 @@ import domain.Table;
 import domain.TableRepository;
 import exception.ChickenException;
 import java.util.List;
-import utils.ValidateUtils;
 import view.InputView;
 import view.OutputView;
 
@@ -44,13 +43,8 @@ public class ChickenController {
         OutputView.chooseMenuAccount();
         int menuAccount = InputView.inputValue();
         Table table = TableRepository.getTable(tableNumber);
-        table.add(MenuRepository.getMenu(menuNumber),menuAccount);
+        table.add(MenuRepository.getMenu(menuNumber), menuAccount);
         run();
-    }
-
-    private static int showTable() {
-        OutputView.printTables(tables);
-        return InputView.inputTableNumber();
     }
 
     public static void pay() {
@@ -61,5 +55,10 @@ public class ChickenController {
     }
 
     public static void exit() {
+    }
+
+    private static int showTable() {
+        OutputView.printTables(tables);
+        return InputView.inputTableNumber();
     }
 }

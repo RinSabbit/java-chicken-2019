@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TableRepository {
+
     private static final List<Table> tables = new ArrayList<>();
 
     static {
@@ -21,7 +22,7 @@ public class TableRepository {
         return Collections.unmodifiableList(tables);
     }
 
-    public static Table getTable(int number){
+    public static Table getTable(int number) {
         return tables.stream()
             .filter(table -> table.isTable(number))
             .findFirst()
