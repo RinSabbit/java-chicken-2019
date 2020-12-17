@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ChickenException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,5 +19,12 @@ public class TableRepository {
 
     public static List<Table> tables() {
         return Collections.unmodifiableList(tables);
+    }
+
+    public static Table getTable(int number){
+        return tables.stream()
+            .filter(table -> table.isTable(number))
+            .findFirst()
+            .orElseThrow(() -> new ChickenException("없는 테이블입니다."));
     }
 }

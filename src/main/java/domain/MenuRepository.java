@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ChickenException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,5 +21,12 @@ public class MenuRepository {
 
     public static List<Menu> menus() {
         return Collections.unmodifiableList(menus);
+    }
+
+    public static Menu getMenu(int number){
+        return menus.stream()
+            .filter(menu -> menu.isMenu(number))
+            .findFirst()
+            .orElseThrow(() -> new ChickenException("없는 메뉴입니다."));
     }
 }

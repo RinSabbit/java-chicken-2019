@@ -45,6 +45,8 @@ public class ChickenController {
         int menuNumber = ValidateUtils.isNumber(InputView.inputValue());
         OutputView.chooseMenuAccount();
         int menuAccount = ValidateUtils.isNumber(InputView.inputValue());
+        Table table = TableRepository.getTable(tableNumber);
+        table.add(MenuRepository.getMenu(menuNumber),menuAccount);
     }
 
     public static void pay() {
