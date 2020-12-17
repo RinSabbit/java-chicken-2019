@@ -8,7 +8,6 @@ import view.OutputView;
 public class Table {
     private final int number;
     private final Map<Menu,Integer> menus;
-    private int payPrice = 0;
 
     public Table(final int number) {
         this.number = number;
@@ -28,10 +27,10 @@ public class Table {
 
     public boolean isNewMenu(Menu menu, int amount){
         if(menus.containsKey(menu)){
-            return true;
+            return false;
         }
         menus.put(menu,amount);
-        return false;
+        return true;
     }
 
     public boolean isOverHundred(Menu menu, int amount){

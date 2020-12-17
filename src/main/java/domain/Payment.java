@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ChickenException;
 import java.util.Map;
 import view.InputView;
 import view.OutputView;
@@ -14,6 +15,7 @@ public class Payment {
     public Payment(Table table, Map<Menu, Integer> menus) {
         this.table = table;
         this.menus = menus;
+        payPrice = 0;
         count = 0;
     }
 
@@ -29,13 +31,17 @@ public class Payment {
         int payment = InputView.inputValue();
         if (payment == 2) {
             payPrice *= 0.95;
+            return;
+        }
+        if(payment != 1){
+            throw new ChickenException("존재하지 않는 결제 수단입니다.");
         }
     }
 
     public void amountSale() {
         menus.forEach((menu, amount) -> countPerTen(menu));
         while (count != 0) {
-            payPrice -= 10000;
+            payPrice -= 10_000;
             count--;
         }
     }
