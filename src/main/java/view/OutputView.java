@@ -56,4 +56,16 @@ public class OutputView {
     public static void showErrorMessage(ChickenException exception) {
         System.out.println(exception.getMessage());
     }
+
+    public static void printChoice() {
+        System.out.println(CHOOSE_CATEGORY);
+    }
+
+    public static void chooseMenu() {
+        System.out.println(CHOOSE_FOOD_MENU);
+    }
+
+    public static void chooseMenuAccount(){
+        System.out.println(INPUT_FOOD_AMOUNT);
+    }
 }
