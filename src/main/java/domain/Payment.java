@@ -41,7 +41,9 @@ public class Payment {
     }
 
     public void countPerTen(Menu menu) {
-        count += table.isMoreThanTen(menu);
+        if(menu.isChicken()){
+            count += table.isMoreThanTen(menu);
+        }
     }
 
 }
