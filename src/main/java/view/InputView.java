@@ -9,4 +9,8 @@ public class InputView {
         System.out.println("## 주문할 테이블을 선택하세요.");
         return scanner.nextInt();
     }
+
+    public static String inputValue() {
+        return scanner.nextLine();
+    }
 }
