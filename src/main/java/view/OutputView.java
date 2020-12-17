@@ -1,18 +1,16 @@
 package view;
 
-import com.sun.media.jfxmediaimpl.HostUtils;
 import domain.MainScreen;
 import domain.Menu;
 import domain.Table;
-
 import exception.ChickenException;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
+    private static final String ORDER_BOTTOM_LINE = "└ ₩ ┘";
     private static final String MAIN_SCREEN_CATEGORY = "## 메인 화면";
     private static final String CHOOSE_CATEGORY = "## 원하는 기능을 선택하세요.";
     private static final String CHOOSE_TABLE = "## 테이블을 선택하세요.";
@@ -24,7 +22,20 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        printLine(BOTTOM_LINE, size);
+        checkOrderedTables(tables);
+    }
+
+    private static void checkOrderedTables(List<Table> tables){
+        tables.forEach(OutputView::printOrderedTables);
+        System.out.println(System.lineSeparator());
+    }
+
+    private static void printOrderedTables(Table table){
+        if(table.hasMenu()){
+            System.out.print(ORDER_BOTTOM_LINE);
+            return;
+        }
+        System.out.print(BOTTOM_LINE);
     }
 
     public static void printMenus(final List<Menu> menus) {
@@ -82,5 +93,9 @@ public class OutputView {
     public static void printFinalPrice(double payPrice) {
         System.out.println("## 최종 결제할 금액");
         System.out.println(Math.round(payPrice) + "원"+System.lineSeparator());
+    }
+
+    public static void chooseTable() {
+        System.out.println(CHOOSE_TABLE);
     }
 }
