@@ -7,6 +7,7 @@ import domain.Table;
 import domain.TableRepository;
 import exception.ChickenException;
 import java.util.List;
+import java.util.Objects;
 import view.InputView;
 import view.OutputView;
 
@@ -15,13 +16,21 @@ public class ChickenController {
     private static List<Table> tables;
     private static List<Menu> menus;
 
-    public ChickenController() {
-        tables = TableRepository.tables();
-        menus = MenuRepository.menus();
+    private ChickenController() {
     }
 
     public static void run() {
+        initializeChicken();
         chooseMainCategory();
+    }
+
+    private static void initializeChicken() {
+        if(Objects.isNull(tables)){
+            tables = TableRepository.tables();
+        }
+        if(Objects.isNull(menus)){
+            menus = MenuRepository.menus();
+        }
     }
 
     private static void chooseMainCategory() {
